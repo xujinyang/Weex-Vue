@@ -14,6 +14,7 @@ function getBaseConfig () {
     output: {
       path: 'dist',
     },
+
     module: {
       loaders: [
         {

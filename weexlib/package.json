@@ -10,14 +10,11 @@
     "vue"
   ],
   "scripts": {
-    "build:web": "webpack --config build/webpack.web.config.js",
-    "build:weex": "webpack --config build/webpack.weex.config.js",
-    "build": "npm run build:web && npm run build:weex",
-    "dev:weex": "webpack --watch --config build/webpack.weex.config.js",
-    "dev:web": "webpack --watch --config build/webpack.web.config.js",
+    "build": "webpack",
+    "dev": "webpack --watch",
     "serve": "node build/init.js && serve -p 8080",
     "debug": "weex-devtool",
-    "copy": "cp dist/app.weex.js ../app/src/main/assets/index.js"
+    "copy": "cp dist/index.weex.js ../app/src/main/assets/index.js"
   },
   "dependencies": {
     "qrcode": "^0.5.0",
