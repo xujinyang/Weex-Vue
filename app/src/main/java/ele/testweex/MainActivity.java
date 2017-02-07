@@ -1,19 +1,35 @@
 package ele.testweex;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.taobao.weex.IWXRenderListener;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.WXSDKManager;
+import com.taobao.weex.common.WXRenderStrategy;
 import com.taobao.weex.utils.WXFileUtils;
 
-public class MainActivity extends Activity implements IWXRenderListener {
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
+import ele.testweex.https.WXHttpManager;
+import ele.testweex.https.WXHttpTask;
+import ele.testweex.https.WXRequestListener;
+
+public class MainActivity extends AppCompatActivity implements IWXRenderListener {
+    private static final String TAG = "MainActivity";
+    private static final String DEFAULT_IP = "10.12.73.21";
+    private static String sCurrentIp = DEFAULT_IP; // your_current_IP
 
     WXSDKInstance mWXSDKInstance;
+    private HashMap mConfigMap = new HashMap<String, Object>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +42,7 @@ public class MainActivity extends Activity implements IWXRenderListener {
         mWXSDKInstance = new WXSDKInstance(this);
         mWXSDKInstance.registerRenderListener(this);
 
-        mWXSDKInstance.render(WXFileUtils.loadAsset("index.js", this));
+        mWXSDKInstance.render(WXFileUtils.loadAsset("index.weex.js", this));
     }
 
     @Override
@@ -49,15 +65,15 @@ public class MainActivity extends Activity implements IWXRenderListener {
 
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
         Log.e("USER ACTION", "BACK");
-        WXSDKManager.getInstance().fireEvent(mWXSDKInstance.getInstanceId(),"_root","androidback");
+        WXSDKManager.getInstance().fireEvent(mWXSDKInstance.getInstanceId(), "_root", "androidback");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(mWXSDKInstance!=null){
+        if (mWXSDKInstance != null) {
             mWXSDKInstance.onActivityResume();
         }
     }
@@ -65,7 +81,7 @@ public class MainActivity extends Activity implements IWXRenderListener {
     @Override
     protected void onPause() {
         super.onPause();
-        if(mWXSDKInstance!=null){
+        if (mWXSDKInstance != null) {
             mWXSDKInstance.onActivityPause();
         }
     }
@@ -73,7 +89,7 @@ public class MainActivity extends Activity implements IWXRenderListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if(mWXSDKInstance!=null){
+        if (mWXSDKInstance != null) {
             mWXSDKInstance.onActivityStop();
         }
     }
@@ -81,9 +97,60 @@ public class MainActivity extends Activity implements IWXRenderListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mWXSDKInstance!=null){
+        if (mWXSDKInstance != null) {
             mWXSDKInstance.onActivityDestroy();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_refresh) {
+            loadWXfromService(getIndexUrl());
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private static String getIndexUrl() {
+        return "http://" + sCurrentIp + ":12580/dist/index.weex.js";
+    }
+
+    private void loadWXfromService(final String url) {
+
+        if (mWXSDKInstance != null) {
+            mWXSDKInstance.destroy();
+        }
+
+        mWXSDKInstance = new WXSDKInstance(this);
+        mWXSDKInstance.registerRenderListener(this);
+
+        WXHttpTask httpTask = new WXHttpTask();
+        httpTask.url = url;
+        httpTask.requestListener = new WXRequestListener() {
+
+            @Override
+            public void onSuccess(WXHttpTask task) {
+                Log.i(TAG, "into--[http:onSuccess] url:" + url);
+                try {
+                    mConfigMap.put("bundleUrl", url);
+                    mWXSDKInstance.render(TAG, new String(task.response.data, "utf-8"), mConfigMap, null, WXRenderStrategy.APPEND_ASYNC);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(WXHttpTask task) {
+                Toast.makeText(getApplicationContext(), "network error!", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        WXHttpManager.getInstance().sendRequest(httpTask);
     }
 }
 

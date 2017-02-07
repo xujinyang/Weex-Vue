@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <text class="weex">Hello Weex1111 !</text>
+    <text class="weex">Hello Weex66 !</text>
     <text class="vue">Hello Vue1111 !</text>
   </div>
 </template>

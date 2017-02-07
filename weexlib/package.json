@@ -12,7 +12,7 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack --watch",
-    "serve": "node build/init.js && serve -p 8080",
+    "serve": "serve ./ -p 12580",
     "debug": "weex-devtool",
     "copy": "cp dist/index.weex.js ../app/src/main/assets/index.js"
   },
