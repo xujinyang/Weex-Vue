@@ -10,6 +10,8 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.taobao.weex.IWXRenderListener;
+import com.taobao.weex.WXEnvironment;
+import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.WXSDKInstance;
 import com.taobao.weex.WXSDKManager;
 import com.taobao.weex.common.WXRenderStrategy;
@@ -112,12 +114,20 @@ public class MainActivity extends AppCompatActivity implements IWXRenderListener
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_refresh) {
             loadWXfromService(getIndexUrl());
+        } else if (item.getItemId() == R.id.action_debug) {
+            initDebugEnvironment(true, sCurrentIp);
+            WXSDKEngine.reload();
         }
         return super.onOptionsItemSelected(item);
     }
 
     private static String getIndexUrl() {
         return "http://" + sCurrentIp + ":12580/dist/index.weex.js";
+    }
+
+    private void initDebugEnvironment(boolean enable, String host) {
+        WXEnvironment.sRemoteDebugMode = enable;
+        WXEnvironment.sRemoteDebugProxyUrl = "ws://" + host + ":8088/debugProxy/native";
     }
 
     private void loadWXfromService(final String url) {

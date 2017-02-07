@@ -3231,7 +3231,7 @@
 	    staticClass: "wrapper"
 	  }, [_c('text', {
 	    staticClass: "weex"
-	  }, [_vm._v("Hello Weex66 !")]), _vm._v(" "), _c('text', {
+	  }, [_vm._v("Hello Weex2333333!")]), _vm._v(" "), _c('text', {
 	    staticClass: "vue"
 	  }, [_vm._v("Hello Vue1111 !")])])
 	},staticRenderFns: []}

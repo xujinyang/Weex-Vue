@@ -2809,7 +2809,7 @@
 	    staticClass: ["wrapper"]
 	  }, [_h('text', {
 	    staticClass: ["weex"]
-	  }, ["Hello Weex66 !"]), _h('text', {
+	  }, ["Hello Weex2333333!"]), _h('text', {
 	    staticClass: ["vue"]
 	  }, ["Hello Vue1111 !"])])
 	}]}
