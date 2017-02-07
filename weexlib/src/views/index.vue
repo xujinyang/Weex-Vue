@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <text class="weex">Hello Weex2333333!</text>
+    <text class="weex">fuck!</text>
     <text class="vue">Hello Vue1111 !</text>
   </div>
 </template>
@@ -15,7 +15,6 @@
     text-align: center;
     color: #1B90F7;
   }
-  
   .vue {
     font-size: 60px;
     text-align: center;

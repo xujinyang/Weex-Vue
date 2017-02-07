@@ -1,6 +1,7 @@
 package ele.testweex;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -121,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements IWXRenderListener
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * http://10.12.73.21:12580/dist/index.weex.js
+     * @return
+     */
     private static String getIndexUrl() {
         return "http://" + sCurrentIp + ":12580/dist/index.weex.js";
     }
