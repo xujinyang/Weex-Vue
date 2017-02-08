@@ -1,6 +1,6 @@
 <template>
     <div class="cell-notice">
-    <text class="title" >{{notice.title}}</text>
+    <text class="title" @click="jump(`/detail/${notice.id}`)">{{notice.title}}</text>
     </div>
 </template>
 

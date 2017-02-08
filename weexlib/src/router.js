@@ -9,6 +9,6 @@ import DetailView from './views/detail.vue'
 export default new Router({
     routes: [
         { path: '/', component: HomeView },
-        { path: '/detail', component: DetailView }
+        { path: '/detail/:id', component: DetailView }
     ]
 })

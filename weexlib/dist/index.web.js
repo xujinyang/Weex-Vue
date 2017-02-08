@@ -245,7 +245,7 @@
 	Vue.use(_vueRouter2.default);
 
 	exports.default = new _vueRouter2.default({
-	    routes: [{ path: '/', component: _index2.default }, { path: '/detail', component: _detail2.default }]
+	    routes: [{ path: '/', component: _index2.default }, { path: '/detail/:id', component: _detail2.default }]
 	});
 
 /***/ },
@@ -3172,7 +3172,12 @@
 	  return _c('div', {
 	    staticClass: "cell-notice"
 	  }, [_c('text', {
-	    staticClass: "title"
+	    staticClass: "title",
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/detail/" + (_vm.notice.id)))
+	      }
+	    }
 	  }, [_vm._v(_vm._s(_vm.notice.title))])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
@@ -4239,7 +4244,7 @@
 	exports.RECIVE_NOTICES = RECIVE_NOTICES;
 	exports.TO_ADD_NUM = TO_ADD_NUM;
 	function RECIVE_NOTICES(state) {
-	    state.notices = [{ title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }];
+	    state.notices = [{ title: '通知1', id: 0, content: '内容1' }, { title: '通知1', id: 1, content: '内容2' }, { title: '通知2', id: 2, content: '内容3' }, { title: '通知3', id: 3, content: '内容4' }, { title: '通知4', id: 4, content: '内容5' }, { title: '通知5', id: 5, content: '内容6' }, { title: '通知6', id: 6, content: '内容7' }, { title: '通知7', id: 7, content: '内容8' }, { title: '通知8', id: 8, content: '内容9' }, { title: '通知9', id: 9, content: '内容10' }, { title: '通知10', id: 10, content: '内容11' }, { title: '通知11', id: 11, content: '内容12' }];
 	}
 
 	function TO_ADD_NUM(state) {
@@ -4455,7 +4460,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.wrapper[data-v-1c10fab6] {\n  flex-direction: column;\n  justify-content: center;\n}\n.weex[data-v-1c10fab6] {\n  font-size: 60px;\n  text-align: center;\n  color: #1B90F7;\n}\n.vue[data-v-1c10fab6] {\n  font-size: 60px;\n  text-align: center;\n  margin-top: 30px;\n  color: #41B883;\n}\n.notice-view[data-v-1c10fab6] {\n    height: 100%;\n}\n.notice-cell[data-v-1c10fab6] {\n    margin-bottom: 3px;\n    border-bottom-width: 2px;\n    border-bottom-style: solid;\n    border-bottom-color: #DDDDDD;\n    background-color: #FFFFFF;\n}\n", ""]);
+	exports.push([module.id, "\n.wrapper[data-v-1c10fab6] {\n  flex-direction: column;\n  justify-content: center;\n}\n.title[data-v-1c10fab6] {\n  font-size: 60px;\n  text-align: center;\n  color: #1B90F7;\n}\n.content[data-v-1c10fab6] {\n  font-size: 60px;\n  text-align: center;\n  margin-top: 30px;\n  color: #41B883;\n}\n", ""]);
 
 	// exports
 
@@ -4468,23 +4473,10 @@
 	  return _c('div', {
 	    staticClass: "wrapper"
 	  }, [_c('text', {
-	    staticClass: "weex"
-	  }, [_vm._v("Hello Weex33 !")]), _vm._v(" "), _c('text', {
-	    staticClass: "vue"
-	  }, [_vm._v("Hello Vue1111 !")]), _vm._v(" "), _c('list', {
-	    staticClass: "notice-list"
-	  }, _vm._l((_vm.notices), function(notice) {
-	    return _c('cell', {
-	      staticClass: "notice-cell",
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_c('notice', {
-	      attrs: {
-	        "notice": notice
-	      }
-	    })], 1)
-	  }))], 1)
+	    staticClass: "title"
+	  }, [_vm._v("标题：" + _vm._s(_vm.notice.title))]), _vm._v(" "), _c('text', {
+	    staticClass: "content"
+	  }, [_vm._v("内容：" + _vm._s(_vm.notice.content))])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -4496,45 +4488,31 @@
 
 /***/ },
 /* 35 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _notice = __webpack_require__(10);
-
-	var _notice2 = _interopRequireDefault(_notice);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	exports.default = {
-	  components: {
-	    notice: _notice2.default
-	  },
 	  computed: {
-	    notices: function notices() {
-	      return this.$store.state.notices;
+	    notice: function notice() {
+	      if (this.$route && this.$route.params) {
+	        return this.$store.state.notices[this.$route.params.id];
+	      }
+	      return { title: "wc", content: "fuck" };
 	    }
-	  },
-	  methods: {},
-	  created: function created() {
-	    this.$store.dispatch('FETCH_LIST_NOTICE');
 	  }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	};
 
 /***/ }
 /******/ ]);

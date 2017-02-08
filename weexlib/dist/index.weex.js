@@ -188,7 +188,7 @@
 	Vue.use(_vueRouter2.default);
 
 	exports.default = new _vueRouter2.default({
-	    routes: [{ path: '/', component: _index2.default }, { path: '/detail', component: _detail2.default }]
+	    routes: [{ path: '/', component: _index2.default }, { path: '/detail/:id', component: _detail2.default }]
 	});
 
 /***/ },
@@ -2769,7 +2769,12 @@
 	  return _h('div', {
 	    staticClass: ["cell-notice"]
 	  }, [_h('text', {
-	    staticClass: ["title"]
+	    staticClass: ["title"],
+	    on: {
+	      "click": function($event) {
+	        _vm.jump(("/detail/" + (_vm.notice.id)))
+	      }
+	    }
 	  }, [_vm._s(_vm.notice.title)])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
@@ -3810,7 +3815,7 @@
 	exports.RECIVE_NOTICES = RECIVE_NOTICES;
 	exports.TO_ADD_NUM = TO_ADD_NUM;
 	function RECIVE_NOTICES(state) {
-	    state.notices = [{ title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }];
+	    state.notices = [{ title: '通知1', id: 0, content: '内容1' }, { title: '通知1', id: 1, content: '内容2' }, { title: '通知2', id: 2, content: '内容3' }, { title: '通知3', id: 3, content: '内容4' }, { title: '通知4', id: 4, content: '内容5' }, { title: '通知5', id: 5, content: '内容6' }, { title: '通知6', id: 6, content: '内容7' }, { title: '通知7', id: 7, content: '内容8' }, { title: '通知8', id: 8, content: '内容9' }, { title: '通知9', id: 9, content: '内容10' }, { title: '通知10', id: 10, content: '内容11' }, { title: '通知11', id: 11, content: '内容12' }];
 	}
 
 	function TO_ADD_NUM(state) {
@@ -4002,26 +4007,16 @@
 	    "flexDirection": "column",
 	    "justifyContent": "center"
 	  },
-	  "weex": {
+	  "title": {
 	    "fontSize": 60,
 	    "textAlign": "center",
 	    "color": "#1B90F7"
 	  },
-	  "vue": {
+	  "content": {
 	    "fontSize": 60,
 	    "textAlign": "center",
 	    "marginTop": 30,
 	    "color": "#41B883"
-	  },
-	  "notice-view": {
-	    "height": 100
-	  },
-	  "notice-cell": {
-	    "marginBottom": 3,
-	    "borderBottomWidth": 2,
-	    "borderBottomStyle": "solid",
-	    "borderBottomColor": "#DDDDDD",
-	    "backgroundColor": "#FFFFFF"
 	  }
 	}
 
@@ -4033,68 +4028,40 @@
 	  return _h('div', {
 	    staticClass: ["wrapper"]
 	  }, [_h('text', {
-	    staticClass: ["weex"]
-	  }, ["Hello Weex33 !"]), _h('text', {
-	    staticClass: ["vue"]
-	  }, ["Hello Vue1111 !"]), _h('list', {
-	    staticClass: ["notice-list"]
-	  }, [_vm._l((_vm.notices), function(notice) {
-	    return _h('cell', {
-	      staticClass: ["notice-cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_h('notice', {
-	      attrs: {
-	        "notice": notice
-	      }
-	    })])
-	  })])])
+	    staticClass: ["title"]
+	  }, ["标题：" + _vm._s(_vm.notice.title)]), _h('text', {
+	    staticClass: ["content"]
+	  }, ["内容：" + _vm._s(_vm.notice.content)])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 
 /***/ },
 /* 28 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _notice = __webpack_require__(9);
-
-	var _notice2 = _interopRequireDefault(_notice);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	//
+	//
+	//
+	//
+	//
+	//
+	//
 
 	exports.default = {
-	  components: {
-	    notice: _notice2.default
-	  },
 	  computed: {
-	    notices: function notices() {
-	      return this.$store.state.notices;
+	    notice: function notice() {
+	      if (this.$route && this.$route.params) {
+	        return this.$store.state.notices[this.$route.params.id];
+	      }
+	      return { title: "wc", content: "fuck" };
 	    }
-	  },
-	  methods: {},
-	  created: function created() {
-	    this.$store.dispatch('FETCH_LIST_NOTICE');
 	  }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
+	};
 
 /***/ }
 /******/ ]);
