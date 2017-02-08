@@ -56,17 +56,17 @@
 
 	var _router2 = _interopRequireDefault(_router);
 
-	var _store = __webpack_require__(18);
+	var _store = __webpack_require__(17);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _vuexRouterSync = __webpack_require__(22);
+	var _vuexRouterSync = __webpack_require__(21);
 
-	var _filters = __webpack_require__(23);
+	var _filters = __webpack_require__(22);
 
 	var filters = _interopRequireWildcard(_filters);
 
-	var _mixins = __webpack_require__(24);
+	var _mixins = __webpack_require__(23);
 
 	var _mixins2 = _interopRequireDefault(_mixins);
 
@@ -175,20 +175,20 @@
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
+	var _details = __webpack_require__(7);
+
+	var _details2 = _interopRequireDefault(_details);
+
 	var _index = __webpack_require__(14);
 
 	var _index2 = _interopRequireDefault(_index);
-
-	var _detail = __webpack_require__(25);
-
-	var _detail2 = _interopRequireDefault(_detail);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	Vue.use(_vueRouter2.default);
 
 	exports.default = new _vueRouter2.default({
-	    routes: [{ path: '/', component: _index2.default }, { path: '/detail', component: _detail2.default }]
+	    routes: [{ path: '/', component: _index2.default }, { path: '/detail', component: _details2.default }]
 	});
 
 /***/ },
@@ -2664,8 +2664,82 @@
 
 
 /***/ },
-/* 7 */,
-/* 8 */,
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_exports__, __vue_options__
+	var __vue_styles__ = []
+
+	/* script */
+	__vue_exports__ = __webpack_require__(8)
+
+	/* template */
+	var __vue_template__ = __webpack_require__(13)
+	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+	if (
+	  typeof __vue_exports__.default === "object" ||
+	  typeof __vue_exports__.default === "function"
+	) {
+	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+	__vue_options__ = __vue_exports__ = __vue_exports__.default
+	}
+	if (typeof __vue_options__ === "function") {
+	  __vue_options__ = __vue_options__.options
+	}
+	__vue_options__.__file = "/Users/mobilexu/Documents/weex/TestWeex/weexlib/src/views/details.vue"
+	__vue_options__.render = __vue_template__.render
+	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+	__vue_options__.style = __vue_options__.style || {}
+	__vue_styles__.forEach(function (module) {
+	for (var name in module) {
+	__vue_options__.style[name] = module[name]
+	}
+	})
+
+	module.exports = __vue_exports__
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _notice = __webpack_require__(9);
+
+	var _notice2 = _interopRequireDefault(_notice);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	  components: {
+	    notice: _notice2.default
+	  },
+	  computed: {
+	    notices: function notices() {
+	      return this.$store.notices;
+	    }
+	  },
+	  methods: {},
+	  created: function created() {
+	    this.$store.dispatch('FETECH_LIST_NOTICE');
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -2775,22 +2849,46 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 13 */,
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _h('div', {
+	    staticClass: ["notice-view"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
+	    }
+	  }, [_h('list', {
+	    staticClass: ["notice-list"]
+	  }, [_vm._l((_vm.notices), function(notice) {
+	    return _h('cell', {
+	      staticClass: ["notice-cell"],
+	      appendAsTree: true,
+	      attrs: {
+	        "append": "tree"
+	      }
+	    }, [_h('notice', {
+	      attrs: {
+	        "notice": notice
+	      }
+	    })])
+	  })])])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+
+/***/ },
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = []
 
-	/* styles */
-	__vue_styles__.push(__webpack_require__(15)
-	)
-
 	/* script */
-	__vue_exports__ = __webpack_require__(16)
+	__vue_exports__ = __webpack_require__(15)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(17)
+	var __vue_template__ = __webpack_require__(16)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -2817,29 +2915,6 @@
 
 /***/ },
 /* 15 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "wrapper": {
-	    "flexDirection": "column",
-	    "justifyContent": "center"
-	  },
-	  "add": {
-	    "fontSize": 60,
-	    "textAlign": "center",
-	    "color": "#1B90F7"
-	  },
-	  "notice-cell": {
-	    "marginBottom": 3,
-	    "borderBottomWidth": 2,
-	    "borderBottomStyle": "solid",
-	    "borderBottomColor": "#DDDDDD",
-	    "backgroundColor": "#FFFFFF"
-	  }
-	}
-
-/***/ },
-/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2860,20 +2935,12 @@
 	  },
 	  computed: {
 	    notices: function notices() {
-	      return this.$store.state.notices;
-	    },
-	    count: function count() {
-	      return this.$store.state.sum;
+	      return this.$store.notices;
 	    }
 	  },
-	  methods: {
-	    num: function num() {
-	      console.log('click num');
-	      this.$store.dispatch('ADD_NUM');
-	    }
-	  },
+	  methods: {},
 	  created: function created() {
-	    this.$store.dispatch('FETCH_LIST_NOTICE');
+	    this.$store.dispatch('FETECH_LIST_NOTICE');
 	  }
 	}; //
 	//
@@ -2885,21 +2952,19 @@
 	//
 	//
 	//
-	//
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _h('div', {
-	    staticClass: ["wrapper"]
-	  }, [_h('text', {
-	    staticClass: ["add"],
-	    on: {
-	      "click": _vm.num
+	    staticClass: ["notice-view"],
+	    appendAsTree: true,
+	    attrs: {
+	      "append": "tree"
 	    }
-	  }, ["点击:" + _vm._s(_vm.count)]), _h('list', {
+	  }, [_h('list', {
 	    staticClass: ["notice-list"]
 	  }, [_vm._l((_vm.notices), function(notice) {
 	    return _h('cell', {
@@ -2918,7 +2983,7 @@
 	module.exports.render._withStripped = true
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2927,15 +2992,15 @@
 	  value: true
 	});
 
-	var _vuex = __webpack_require__(19);
+	var _vuex = __webpack_require__(18);
 
 	var _vuex2 = _interopRequireDefault(_vuex);
 
-	var _actions = __webpack_require__(20);
+	var _actions = __webpack_require__(19);
 
 	var actions = _interopRequireWildcard(_actions);
 
-	var _mutations = __webpack_require__(21);
+	var _mutations = __webpack_require__(20);
 
 	var mutations = _interopRequireWildcard(_mutations);
 
@@ -2952,7 +3017,6 @@
 	  actions: actions,
 	  mutations: mutations,
 	  state: {
-	    sum: 0,
 	    notices: []
 	  }
 	});
@@ -2960,7 +3024,7 @@
 	exports.default = store;
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -3771,7 +3835,7 @@
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3780,26 +3844,16 @@
 	    value: true
 	});
 	exports.FETCH_LIST_NOTICE = FETCH_LIST_NOTICE;
-	exports.ADD_NUM = ADD_NUM;
 	function FETCH_LIST_NOTICE(_ref) {
 	    var commit = _ref.commit,
 	        dispatch = _ref.dispatch,
 	        state = _ref.state;
 
-	    commit('RECIVE_NOTICES');
-	}
-
-	function ADD_NUM(_ref2) {
-	    var commit = _ref2.commit;
-
-	    setTimeout(function () {
-	        console.log('click num2');
-	        commit('TO_ADD_NUM');
-	    }, 1000);
+	    commit('RECIVE_NOTICES', {});
 	}
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3808,18 +3862,12 @@
 	    value: true
 	});
 	exports.RECIVE_NOTICES = RECIVE_NOTICES;
-	exports.TO_ADD_NUM = TO_ADD_NUM;
 	function RECIVE_NOTICES(state) {
 	    state.notices = [{ title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }, { title: '通知1', id: 1, content: '内容1' }];
 	}
 
-	function TO_ADD_NUM(state) {
-	    console.log('click num3');
-	    state.sum++;
-	}
-
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	exports.sync = function (store, router, options) {
@@ -3880,7 +3928,7 @@
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -3935,7 +3983,7 @@
 	}
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3952,149 +4000,6 @@
 	    }
 	  }
 	};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_exports__, __vue_options__
-	var __vue_styles__ = []
-
-	/* styles */
-	__vue_styles__.push(__webpack_require__(26)
-	)
-
-	/* script */
-	__vue_exports__ = __webpack_require__(28)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(27)
-	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-	if (
-	  typeof __vue_exports__.default === "object" ||
-	  typeof __vue_exports__.default === "function"
-	) {
-	if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-	__vue_options__ = __vue_exports__ = __vue_exports__.default
-	}
-	if (typeof __vue_options__ === "function") {
-	  __vue_options__ = __vue_options__.options
-	}
-	__vue_options__.__file = "/Users/mobilexu/Documents/weex/TestWeex/weexlib/src/views/detail.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-	__vue_options__.style = __vue_options__.style || {}
-	__vue_styles__.forEach(function (module) {
-	for (var name in module) {
-	__vue_options__.style[name] = module[name]
-	}
-	})
-
-	module.exports = __vue_exports__
-
-
-/***/ },
-/* 26 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  "wrapper": {
-	    "flexDirection": "column",
-	    "justifyContent": "center"
-	  },
-	  "weex": {
-	    "fontSize": 60,
-	    "textAlign": "center",
-	    "color": "#1B90F7"
-	  },
-	  "vue": {
-	    "fontSize": 60,
-	    "textAlign": "center",
-	    "marginTop": 30,
-	    "color": "#41B883"
-	  },
-	  "notice-view": {
-	    "height": 100
-	  },
-	  "notice-cell": {
-	    "marginBottom": 3,
-	    "borderBottomWidth": 2,
-	    "borderBottomStyle": "solid",
-	    "borderBottomColor": "#DDDDDD",
-	    "backgroundColor": "#FFFFFF"
-	  }
-	}
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _h('div', {
-	    staticClass: ["wrapper"]
-	  }, [_h('text', {
-	    staticClass: ["weex"]
-	  }, ["Hello Weex33 !"]), _h('text', {
-	    staticClass: ["vue"]
-	  }, ["Hello Vue1111 !"]), _h('list', {
-	    staticClass: ["notice-list"]
-	  }, [_vm._l((_vm.notices), function(notice) {
-	    return _h('cell', {
-	      staticClass: ["notice-cell"],
-	      appendAsTree: true,
-	      attrs: {
-	        "append": "tree"
-	      }
-	    }, [_h('notice', {
-	      attrs: {
-	        "notice": notice
-	      }
-	    })])
-	  })])])
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _notice = __webpack_require__(9);
-
-	var _notice2 = _interopRequireDefault(_notice);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  components: {
-	    notice: _notice2.default
-	  },
-	  computed: {
-	    notices: function notices() {
-	      return this.$store.state.notices;
-	    }
-	  },
-	  methods: {},
-	  created: function created() {
-	    this.$store.dispatch('FETCH_LIST_NOTICE');
-	  }
-	}; //
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 
 /***/ }
 /******/ ]);
