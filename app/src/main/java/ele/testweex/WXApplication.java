@@ -6,6 +6,8 @@ import android.app.Application;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 
+import me.ele.weexlpd.adapter.ImageAdapter;
+
 
 /**
  * Created by Hanks on 16/12/8.

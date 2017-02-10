@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/mobilexu/Documents/weex/TestWeex/weexlpd/build/intermediates/res/merged/androidTest/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/Users/mobilexu/Documents/weex/TestWeex/weexlpd/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable-v23/abc_control_background_material.xml"
+    },
+    {
+        "merged": "/Users/mobilexu/Documents/gitLab/talaris_shop_center/weexlpd/build/intermediates/res/merged/androidTest/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/Users/mobilexu/Documents/gitLab/talaris_shop_center/weexlpd/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/res/drawable-v23/abc_control_background_material.xml"
+    }
+]
